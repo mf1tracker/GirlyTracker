@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#f472b6" id="metaThemeColor" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="KittyNutri" />
+  <title>KittyNutri • Makros, Zyklus & Glow</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+  <link rel="apple-touch-icon" sizes="192x192" href="./icon-192.png" />
+  <link rel="apple-touch-icon" sizes="512x512" href="./icon-512.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      /* Default Theme: Strawberry Milk */
+      --bg-base: #fdf2f7;
+      --bg-grad: radial-gradient(circle at 50% 0%, #ffe4f0 0%, #fdf2f7 70%);
+      --orb-1: #f472b6;
+      --orb-2: #fb7185;
+      --orb-3: #e879f9;
+      --glass-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.80) 0%, rgba(255, 240, 247, 0.72) 100%);
+      --glass-subtle: rgba(255, 255, 255, 0.58);
+      --glass-border: rgba(244, 114, 182, 0.25);
+      --glass-shadow: 0 12px 32px -10px rgba(219, 39, 119, 0.16), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+      --dock-bg: rgba(255, 245, 250, 0.86);
+      --modal-bg: linear-gradient(180deg, rgba(255, 248, 252, 0.97) 0%, rgba(253, 232, 243, 0.98) 100%);
+      --header-bg: rgba(253, 242, 247, 0.78);
+      --text-main: #4a152f;
+      --text-muted: #8c4a6b;
+      --text-soft: #b06e8e;
+      --accent: #ec4899;
+      --accent-2: #f43f5e;
+      --accent-soft: rgba(236, 72, 153, 0.14);
+      --input-bg: rgba(255, 255, 255, 0.75);
+      --bar-track: rgba(236, 72, 153, 0.12);
+    }
+
+    /* Theme 2: Sakura Blossom */
+    [data-theme="sakura"] {
+      --bg-base: #fff5f9;
+      --bg-grad: radial-gradient(circle at 50% 0%, #fce7f3 0%, #f5d0fe 45%, #fff5f9 85%);
+      --orb-1: #f9a8d4;
+      --orb-2: #d8b4fe;
+      --orb-3: #fda4af;
+      --glass-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.84) 0%, rgba(250, 232, 255, 0.70) 100%);
+      --glass-subtle: rgba(255, 255, 255, 0.62);
+      --glass-border: rgba(217, 70, 239, 0.22);
+      --glass-shadow: 0 12px 32px -10px rgba(192, 38, 211, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.95);
+      --dock-bg: rgba(255, 248, 253, 0.88);
+      --modal-bg: linear-gradient(180deg, rgba(255, 250, 254, 0.97) 0%, rgba(250, 232, 255, 0.98) 100%);
+      --header-bg: rgba(255, 245, 249, 0.80);
+      --text-main: #4c1d4b;
+      --text-muted: #864d84;
+      --text-soft: #a873a6;
+      --accent: #d946ef;
+      --accent-2: #ec4899;
+      --accent-soft: rgba(217, 70, 239, 0.14);
+      --input-bg: rgba(255, 255, 255, 0.80);
+      --bar-track: rgba(217, 70, 239, 0.12);
+    }
+
+    /* Theme 3: Y2K Hot Berry */
+    [data-theme="y2k"] {
+      --bg-base: #ffe4f1;
+      --bg-grad: radial-gradient(circle at 20% 0%, #fbcfe8 0%, #f9a8d4 45%, #ffe4f1 90%);
+      --orb-1: #db2777;
+      --orb-2: #e11d48;
+      --orb-3: #f43f5e;
+      --glass-bg: linear-gradient(155deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 228, 242, 0.72) 100%);
+      --glass-subtle: rgba(255, 255, 255, 0.55);
+      --glass-border: rgba(219, 39, 119, 0.28);
+      --glass-shadow: 0 14px 34px -10px rgba(219, 39, 119, 0.24), inset 0 1px 0 0 rgba(255, 255, 255, 0.92);
+      --dock-bg: rgba(255, 235, 245, 0.88);
+      --modal-bg: linear-gradient(180deg, rgba(255, 242, 248, 0.97) 0%, rgba(252, 213, 233, 0.98) 100%);
+      --header-bg: rgba(255, 228, 241, 0.80);
+      --text-main: #500724;
+      --text-muted: #831843;
+      --text-soft: #9d174d;
+      --accent: #db2777;
+      --accent-2: #e11d48;
+      --accent-soft: rgba(219, 39, 119, 0.16);
+      --input-bg: rgba(255, 255, 255, 0.76);
+      --bar-track: rgba(219, 39, 119, 0.15);
+    }
+
+    /* Theme 4: Velvet Rose Dark (Night Mode) */
+    [data-theme="velvet"] {
+      --bg-base: #14070e;
+      --bg-grad: radial-gradient(circle at 50% 0%, #2d0f20 0%, #14070e 72%);
+      --orb-1: #ec4899;
+      --orb-2: #e11d48;
+      --orb-3: #c026d3;
+      --glass-bg: linear-gradient(155deg, rgba(56, 20, 40, 0.66) 0%, rgba(28, 10, 20, 0.78) 100%);
+      --glass-subtle: rgba(255, 192, 224, 0.07);
+      --glass-border: rgba(244, 114, 182, 0.22);
+      --glass-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.75), inset 0 1px 0 0 rgba(255, 210, 232, 0.16);
+      --dock-bg: rgba(26, 9, 18, 0.86);
+      --modal-bg: linear-gradient(180deg, rgba(42, 14, 29, 0.96) 0%, rgba(20, 7, 14, 0.98) 100%);
+      --header-bg: rgba(20, 7, 14, 0.78);
+      --text-main: #fff1f7;
+      --text-muted: #f9a8d4;
+      --text-soft: #d884af;
+      --accent: #f472b6;
+      --accent-2: #fb7185;
+      --accent-soft: rgba(244, 114, 182, 0.18);
+      --input-bg: rgba(0, 0, 0, 0.35);
+      --bar-track: rgba(255, 255, 255, 0.10);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Quicksand', 'Inter', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    .ambient-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: var(--bg-grad);
+    }
+    .orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(85px);
+      opacity: 0.36;
+      animation: floatOrb 16s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 270px; height: 270px; top: -60px; left: -50px; background: var(--orb-1); }
+    .orb-2 { width: 250px; height: 250px; top: 30%; right: -70px; background: var(--orb-2); animation-delay: -5s; }
+    .orb-3 { width: 230px; height: 230px; bottom: 8%; left: 8%; background: var(--orb-3); opacity: 0.26; animation-delay: -10s; }
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(20px, 28px) scale(1.08); }
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(22px) saturate(165%);
+      -webkit-backdrop-filter: blur(22px) saturate(165%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+    .glass-subtle {
+      background: var(--glass-subtle);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+    }
+    .glass-pill {
+      background: var(--glass-subtle);
+      border: 1px solid var(--glass-border);
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .glass-pill:active { transform: scale(0.96); }
+    .glass-dock {
+      background: var(--dock-bg);
+      backdrop-filter: blur(26px) saturate(180%);
+      -webkit-backdrop-filter: blur(26px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+    .glass-modal {
+      background: var(--modal-bg);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border-top: 1px solid var(--glass-border);
+      color: var(--text-main);
+    }
+    .theme-input {
+      background: var(--input-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+    }
+    .theme-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .bar-track { background: var(--bar-track); }
+    .text-main { color: var(--text-main); }
+    .text-muted { color: var(--text-muted); }
+    .text-soft { color: var(--text-soft); }
+    .text-accent { color: var(--accent); }
+    .bg-accent-soft { background: var(--accent-soft); }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type="number"] { -moz-appearance: textfield; }
+
+    .tab-view { animation: fadeSlideUp 0.24s cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes kawaiiBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-2.5px) rotate(2deg); }
+    }
+    .kitty-float { animation: kawaiiBounce 3.2s ease-in-out infinite; }
+
+    #qr-reader { border: none !important; border-radius: 16px; overflow: hidden; }
+    #qr-reader video { border-radius: 16px; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <div class="ambient-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Main App Shell -->
+  <div class="relative z-10 max-w-[480px] mx-auto min-h-[100dvh] flex flex-col pb-28">
+    
+    <!-- Top Sticky Kawaii Glass Header -->
+    <header style="background: var(--header-bg); border-color: var(--glass-border);" class="sticky top-0 z-30 px-4 pt-[calc(10px+var(--safe-top))] pb-3 backdrop-blur-xl border-b">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5">
+          <!-- Kawaii Bow-Kitty Mascot Badge -->
+          <div class="w-10 h-10 rounded-2xl glass-card flex items-center justify-center shrink-0 kitty-float" id="headerKittyIcon"></div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h1 class="text-sm font-extrabold tracking-tight text-main">KittyNutri</h1>
+              <span id="phaseBadge" onclick="cycleGoalMode()" class="cursor-pointer text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-soft text-accent border border-pink-400/30">
+                Recomp • 2250
+              </span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <button onclick="shiftDate(-1)" class="text-muted hover:text-accent text-xs px-1 font-bold">◀</button>
+              <span id="currentDateLabel" class="text-[11px] font-bold text-muted">Heute</span>
+              <button onclick="shiftDate(1)" class="text-muted hover:text-accent text-xs px-1 font-bold">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <!-- Theme Switcher Button -->
+          <button onclick="cycleTheme()" id="themeBtn" title="Pink Theme wechseln" class="glass-pill px-2.5 py-2 rounded-2xl text-xs font-bold text-main flex items-center gap-1">
+            🎀
+          </button>
+          <!-- Quick Log Button -->
+          <button onclick="openQuickLogModal()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="px-3 py-2 rounded-2xl flex items-center gap-1 text-xs font-extrabold text-white shadow-md active:scale-95 transition-transform">
+            <span class="text-sm leading-none">+</span> Log
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dynamic Viewport -->
+    <main id="appViewport" class="flex-1 px-4 pt-4 space-y-4"></main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-2">
+      <div class="glass-card px-4 py-2.5 rounded-2xl text-xs font-bold text-main flex items-center gap-2 shadow-xl">
+        <span id="toastIcon">🎀</span>
+        <span id="toastText">Gespeichert</span>
+      </div>
+    </div>
+
+    <!-- Floating Bottom Glass Dock (5 Tabs incl. Zyklus!) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-40 px-3 pb-[calc(10px+var(--safe-bottom))] pt-2 pointer-events-none">
+      <div class="max-w-[456px] mx-auto glass-dock rounded-[26px] p-1.5 grid grid-cols-5 gap-1 pointer-events-auto">
+        <button onclick="switchTab('today')" data-tab="today" class="nav-btn flex flex-col items-center justify-center py-2 rounded-2xl text-[10px] font-bold transition-all">
+          <span class="text-base leading-none mb-0.5">🏠</span>
+          Heute
+        </button>
+        <button onclick="switchTab('cycle')" data-tab="cycle" class="nav-btn flex flex-col items-center justify-center py-2 rounded-2xl text-[10px] font-bold transition-all">
+          <span class="text-base leading-none mb-0.5">🌸</span>
+          Zyklus
+        </button>
+        <button onclick="switchTab('scan')" data-tab="scan" class="nav-btn flex flex-col items-center justify-center py-2 rounded-2xl text-[10px] font-bold transition-all">
+          <span class="text-base leading-none mb-0.5">📷</span>
+          Scan
+        </button>
+        <button onclick="switchTab('supps')" data-tab="supps" class="nav-btn flex flex-col items-center justify-center py-2 rounded-2xl text-[10px] font-bold transition-all">
+          <span class="text-base leading-none mb-0.5">💊</span>
+          Supps
+        </button>
+        <button onclick="switchTab('presets')" data-tab="presets" class="nav-btn flex flex-col items-center justify-center py-2 rounded-2xl text-[10px] font-bold transition-all">
+          <span class="text-base leading-none mb-0.5">🎀</span>
+          1-Klick
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="modalBackdrop" class="fixed inset-0 z-50 bg-black/55 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="closeModalOnBackdrop(event)">
+    <div id="modalSheet" class="glass-modal w-full max-w-[480px] rounded-t-[30px] sm:rounded-[30px] max-h-[88dvh] overflow-y-auto p-5 pb-[calc(24px+var(--safe-bottom))] shadow-2xl"></div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 0. KAWAII BOW-KITTY SVG GENERATOR (ORIGINAL VECTOR ARTWORK)
+    // =========================================================================
+    function kittySVG(size = 32, bowColor = '#f43f5e') {
+      return `
+        <svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 46 L25 18 L44 33 Z" fill="#FFFFFF" stroke="#4a152f" stroke-width="4.5" stroke-linejoin="round"/>
+          <path d="M78 46 L75 18 L56 33 Z" fill="#FFFFFF" stroke="#4a152f" stroke-width="4.5" stroke-linejoin="round"/>
+          <ellipse cx="50" cy="57" rx="33" ry="26" fill="#FFFFFF" stroke="#4a152f" stroke-width="4.5"/>
+          <path d="M24 46 L26 21 L42 34 Z" fill="#FFFFFF"/>
+          <path d="M76 46 L74 21 L58 34 Z" fill="#FFFFFF"/>
+          <ellipse cx="35" cy="57" rx="2.8" ry="4" fill="#4a152f"/>
+          <ellipse cx="65" cy="57" rx="2.8" ry="4" fill="#4a152f"/>
+          <ellipse cx="30" cy="64" rx="5" ry="2.6" fill="#fb7185" opacity="0.5"/>
+          <ellipse cx="70" cy="64" rx="5" ry="2.6" fill="#fb7185" opacity="0.5"/>
+          <ellipse cx="50" cy="62" rx="3.6" ry="2.4" fill="#facc15" stroke="#4a152f" stroke-width="2.5"/>
+          <line x1="10" y1="53" x2="22" y2="55" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="9" y1="60" x2="21" y2="60" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="11" y1="67" x2="22" y2="65" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="90" y1="53" x2="78" y2="55" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="91" y1="60" x2="79" y2="60" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <line x1="89" y1="67" x2="78" y2="65" stroke="#4a152f" stroke-width="3" stroke-linecap="round"/>
+          <g transform="translate(68, 28) rotate(22)">
+            <ellipse cx="-8" cy="0" rx="8.5" ry="6.5" fill="${bowColor}" stroke="#4a152f" stroke-width="3.2"/>
+            <ellipse cx="8" cy="0" rx="8.5" ry="6.5" fill="${bowColor}" stroke="#4a152f" stroke-width="3.2"/>
+            <circle cx="0" cy="0" r="4.5" fill="#fda4af" stroke="#4a152f" stroke-width="3"/>
+          </g>
+        </svg>
+      `;
+    }
+
+    function bowBadgeSVG(size = 18) {
+      return `
+        <svg width="${size}" height="${size}" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block">
+          <path d="M28 20 C16 6, 4 8, 6 20 C4 32, 16 34, 28 20 Z" fill="#f43f5e" stroke="#4a152f" stroke-width="3.5"/>
+          <path d="M36 20 C48 6, 60 8, 58 20 C60 32, 48 34, 36 20 Z" fill="#f43f5e" stroke="#4a152f" stroke-width="3.5"/>
+          <circle cx="32" cy="20" r="7" fill="#fb7185" stroke="#4a152f" stroke-width="3.5"/>
+        </svg>
+      `;
+    }
+
+    // =========================================================================
+    // 1. PINK / ROSA THEMES DEFINITION
+    // =========================================================================
+    const THEMES = [
+      { id: 'strawberry', name: 'Strawberry Milk', emoji: '🎀', metaColor: '#f472b6' },
+      { id: 'sakura',     name: 'Sakura Blossom',  emoji: '🌸', metaColor: '#e879f9' },
+      { id: 'y2k',        name: 'Y2K Hot Berry',   emoji: '🪩', metaColor: '#db2777' },
+      { id: 'velvet',     name: 'Velvet Rose Dark',emoji: '🌙', metaColor: '#2d0f20' }
+    ];
+
+    // =========================================================================
+    // 2. 4-PHASE CYCLE TRACKER KNOWLEDGE BASE & FOOD SUGGESTIONS
+    // =========================================================================
+    const CYCLE_PHASES = [
+      {
+        id: 'menstruation',
+        name: 'Menstruationsphase',
+        short: 'Periode',
+        icon: '🌺',
+        daysLabel: 'Tag 1–5',
+        color: '#f43f5e',
+        kcalBonus: 0,
+        hormoneInfo: 'Östrogen & Progesteron sind am Tiefpunkt. Dein Körper regeneriert und verliert Eisen.',
+        gymTip: 'Sanftes Training, Mobility, leichtes Oberkörper-Workout oder Spaziergänge – hör auf dein Energielevel.',
+        gutTip: 'Reizdarm-Fokus: Warme, gekochte & leicht verdauliche Speisen bevorzugen, kalte Rohkost reduzieren.',
+        nutrients: ['Eisen + Vitamin C', 'Omega-3', 'Magnesium', 'Wärmende Kost'],
+        suggestedFoods: [
+          { foodId: 'haferflocken', reason: 'Sanft für den Darm & liefert Eisen + Magnesium' },
+          { foodId: 'beeren', reason: 'Vitamin C verbessert die Eisenaufnahme deutlich' },
+          { foodId: 'zartbitterschoko', reason: 'Natürliches Magnesium & Seelenfutter' },
+          { foodId: 'huehnerbrust', reason: 'Leicht verdauliches Protein & Hämeisen' }
+        ]
+      },
+      {
+        id: 'follicular',
+        name: 'Follikelphase',
+        short: 'Follikel',
+        icon: '🌱',
+        daysLabel: 'Tag 6–13',
+        color: '#ec4899',
+        kcalBonus: 0,
+        hormoneInfo: 'Östrogen steigt stetig an. Deine Energie, Stimmung und Insulinsensitivität steigen.',
+        gymTip: 'Beste Zeit für progressive Steigerung, neue Gewichts-PRs und intensive Bein-/Glute-Sessions!',
+        gutTip: 'Deine Verdauung ist jetzt meist sehr stabil – ideal für Ballaststoffe & fermentierte Milchprodukte.',
+        nutrients: ['Komplexe Carbs', 'Lean Protein', 'Probiotika', 'Ballaststoffe'],
+        suggestedFoods: [
+          { foodId: 'skyr', reason: 'Top Proteinquelle & gut verträglich' },
+          { foodId: 'dinkelbrot', reason: 'Stabile Energie & wertvolle Ballaststoffe' },
+          { foodId: 'holies', reason: 'Knuspriger Protein- & Ballaststoff-Kick' },
+          { foodId: 'leinsamen', reason: 'Unterstützt gesunden Östrogen-Stoffwechsel' }
+        ]
+      },
+      {
+        id: 'ovulation',
+        name: 'Ovulationsphase',
+        short: 'Eisprung',
+        icon: '✨',
+        daysLabel: 'Tag 14–16',
+        color: '#d946ef',
+        kcalBonus: 0,
+        hormoneInfo: 'Östrogen- & Testosteron-Peak! Maximale Kraft, Ausstrahlung und Stoffwechselaktivität.',
+        gymTip: 'Peak-Performance im Gym – nutze die volle Power für schwere Verbundübungen.',
+        gutTip: 'Antioxidantien & Zink unterstützen Zellschutz, Haut & Haare (perfekt zu Haar Intensiv + Biotin).',
+        nutrients: ['Antioxidantien', 'Zink & B-Vitamine', 'Leichtes Protein', 'Viel Wasser'],
+        suggestedFoods: [
+          { foodId: 'eier', reason: 'Cholin, Zink & B-Vitamine für Hormone & Haare' },
+          { foodId: 'beeren', reason: 'Hohe Dichte an Antioxidantien' },
+          { foodId: 'kuerbiskerne', reason: 'Zink-Booster für Haut, Haare & Eisprung' },
+          { foodId: 'thunfisch', reason: 'Leichtes Eiweiß & Omega-3' }
+        ]
+      },
+      {
+        id: 'luteal',
+        name: 'Lutealphase',
+        short: 'Luteal',
+        icon: '🌙',
+        daysLabel: 'Tag 17–28',
+        color: '#a855f7',
+        kcalBonus: 150,
+        hormoneInfo: 'Progesteron steigt, Grundumsatz erhöht sich leicht (+100–200 kcal). Serotonin sinkt → Cravings möglich.',
+        gymTip: 'Moderates Krafttraining, Fokus auf saubere Technik statt Maximalgewichte; etwas längere Satzpausen.',
+        gutTip: 'Progesteron verlangsamt die Darmbewegung: Lösliche Ballaststoffe + viel Wasser helfen gegen Blähbauch.',
+        nutrients: ['+150 kcal Puffer', 'Komplexe Carbs', 'Magnesium & B6', 'Lösliche Ballaststoffe'],
+        suggestedFoods: [
+          { foodId: 'banane', reason: 'Vitamin B6 & Tryptophan für gute Stimmung' },
+          { foodId: 'suesskartoffel', reason: 'Langkettige Carbs stoppen Heißhunger sanft' },
+          { foodId: 'zartbitterschoko', reason: 'Befriedigt Schoko-Cravings mit Magnesium' },
+          { foodId: 'skyr', reason: 'Hält lange satt & stabilisiert Blutzucker' }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 3. FOOD DATABASE (INCL. CYCLE-SUPPORTING & GUT-FRIENDLY FOODS)
+    // =========================================================================
+    const DEFAULT_FOODS = [
+      // Brot, Getreide & Ballaststoffe
+      { id: 'dinkelbrot', name: 'Dinkelvollkornbrot', cat: 'Brot & Getreide', unit: 'g', defaultQty: 100, gutFriendly: true, kcal: 230, p: 9.0, kh: 38.0, f: 3.5, fib: 6.5, micro: { mg: 65, fe: 2.2, zn: 1.5, ca: 25, b12: 0, biotin: 6 } },
+      { id: 'spar_eiweissbrot', name: 'SPAR Vital Eiweißbrot', cat: 'Brot & Getreide', unit: 'g', defaultQty: 90, gutFriendly: true, kcal: 248, p: 22.0, kh: 14.0, f: 9.5, fib: 9.8, micro: { mg: 80, fe: 3.1, zn: 2.4, ca: 60, b12: 0, biotin: 8 } },
+      { id: 'holies', name: 'Holies (Crunch / Flakes)', cat: 'Brot & Getreide', unit: 'g', defaultQty: 45, gutFriendly: true, kcal: 462, p: 27.0, kh: 28.0, f: 25.0, fib: 11.0, micro: { mg: 110, fe: 3.5, zn: 2.8, ca: 75, b12: 0, biotin: 12 } },
+      { id: 'haferflocken', name: 'Haferflocken (zart)', cat: 'Brot & Getreide', unit: 'g', defaultQty: 50, gutFriendly: true, kcal: 372, p: 13.5, kh: 58.7, f: 7.0, fib: 10.0, micro: { mg: 130, fe: 4.6, zn: 3.6, ca: 54, b12: 0, biotin: 20 } },
+      { id: 'sojaflocken', name: 'Sojaflocken', cat: 'Brot & Getreide', unit: 'g', defaultQty: 20, gutFriendly: false, kcal: 416, p: 41.0, kh: 13.0, f: 20.0, fib: 11.5, micro: { mg: 220, fe: 8.5, zn: 4.2, ca: 195, b12: 0, biotin: 60 } },
+      { id: 'leinsamen', name: 'Leinsamen (geschrotet)', cat: 'Brot & Getreide', unit: 'g', defaultQty: 15, gutFriendly: true, kcal: 495, p: 22.0, kh: 4.0, f: 36.0, fib: 27.0, micro: { mg: 350, fe: 5.7, zn: 4.3, ca: 230, b12: 0, biotin: 8 } },
+      { id: 'basmatireis', name: 'Basmatireis (roh)', cat: 'Brot & Getreide', unit: 'g', defaultQty: 80, gutFriendly: true, kcal: 350, p: 7.5, kh: 78.0, f: 0.8, fib: 1.4, micro: { mg: 25, fe: 0.8, zn: 1.1, ca: 10, b12: 0, biotin: 2 } },
+      { id: 'suesskartoffel', name: 'Süßkartoffel (gegart)', cat: 'Zyklus & Glow', unit: 'g', defaultQty: 200, gutFriendly: true, kcal: 86, p: 1.6, kh: 20.0, f: 0.1, fib: 3.0, micro: { mg: 25, fe: 0.6, zn: 0.3, ca: 30, b12: 0, biotin: 4 } },
+
+      // Milchprodukte & Käse (Standard Milch = 3,5 % Fett)
+      { id: 'milch_35', name: 'Milch 3,5 % Fett', cat: 'Milch & Käse', unit: 'ml', defaultQty: 200, gutFriendly: true, kcal: 64, p: 3.3, kh: 4.8, f: 3.5, fib: 0.0, micro: { mg: 12, fe: 0.05, zn: 0.4, ca: 120, b12: 0.4, biotin: 3 } },
+      { id: 'proteinkaese', name: 'Proteinkäse', cat: 'Milch & Käse', unit: 'g', defaultQty: 60, gutFriendly: true, kcal: 219, p: 32.0, kh: 0.3, f: 9.5, fib: 0.0, micro: { mg: 35, fe: 0.3, zn: 3.8, ca: 850, b12: 1.6, biotin: 4 } },
+      { id: 'frischkaese', name: 'Frischkäse', cat: 'Milch & Käse', unit: 'g', defaultQty: 20, gutFriendly: true, kcal: 235, p: 6.0, kh: 3.0, f: 22.0, fib: 0.0, micro: { mg: 8, fe: 0.1, zn: 0.5, ca: 95, b12: 0.3, biotin: 2 } },
+      { id: 'skyr', name: 'Skyr Natur', cat: 'Milch & Käse', unit: 'g', defaultQty: 200, gutFriendly: true, kcal: 62, p: 11.0, kh: 4.0, f: 0.2, fib: 0.0, micro: { mg: 11, fe: 0.1, zn: 0.5, ca: 130, b12: 0.5, biotin: 3 } },
+      { id: 'joghurt_2', name: 'Griechisches Joghurt 2 %', cat: 'Milch & Käse', unit: 'g', defaultQty: 180, gutFriendly: true, kcal: 73, p: 9.0, kh: 4.0, f: 2.0, fib: 0.0, micro: { mg: 11, fe: 0.1, zn: 0.5, ca: 115, b12: 0.5, biotin: 3 } },
+      { id: 'cottage_cheese', name: 'Cottage Cheese', cat: 'Milch & Käse', unit: 'g', defaultQty: 150, gutFriendly: true, kcal: 98, p: 12.5, kh: 3.2, f: 4.0, fib: 0.0, micro: { mg: 9, fe: 0.1, zn: 0.4, ca: 85, b12: 0.6, biotin: 3 } },
+
+      // Protein, Fleisch & Shakes
+      { id: 'huehnerbrust', name: 'Hühnerbrustfilet (roh)', cat: 'Protein & Shakes', unit: 'g', defaultQty: 160, gutFriendly: true, kcal: 110, p: 23.0, kh: 0.0, f: 1.5, fib: 0.0, micro: { mg: 28, fe: 0.7, zn: 0.9, ca: 11, b12: 0.3, biotin: 2 } },
+      { id: 'thunfisch', name: 'Thunfisch im eigenen Saft', cat: 'Protein & Shakes', unit: 'g', defaultQty: 120, gutFriendly: true, kcal: 108, p: 25.0, kh: 0.0, f: 0.8, fib: 0.0, micro: { mg: 30, fe: 1.1, zn: 0.8, ca: 14, b12: 2.5, biotin: 3 } },
+      { id: 'eier', name: 'Vollei (1 Stk ≈ 60g)', cat: 'Protein & Shakes', unit: 'g', defaultQty: 120, gutFriendly: true, kcal: 143, p: 12.6, kh: 0.7, f: 9.5, fib: 0.0, micro: { mg: 12, fe: 1.8, zn: 1.3, ca: 56, b12: 1.3, biotin: 25 } },
+      { id: 'whey', name: 'Whey Protein Pulver', cat: 'Protein & Shakes', unit: 'g', defaultQty: 30, gutFriendly: true, kcal: 385, p: 78.0, kh: 6.5, f: 5.2, fib: 1.5, micro: { mg: 65, fe: 0.9, zn: 1.5, ca: 450, b12: 1.8, biotin: 5 } },
+      { id: 'clear_whey', name: 'Clear Whey Isolate', cat: 'Protein & Shakes', unit: 'g', defaultQty: 30, gutFriendly: true, kcal: 345, p: 82.0, kh: 2.5, f: 0.5, fib: 0.0, micro: { mg: 20, fe: 0.2, zn: 0.5, ca: 150, b12: 1.2, biotin: 2 } },
+
+      // Zyklus-Booster, Obst & Toppings
+      { id: 'beeren', name: 'Beeren-Mix (TK / frisch)', cat: 'Zyklus & Glow', unit: 'g', defaultQty: 100, gutFriendly: true, kcal: 48, p: 1.0, kh: 8.5, f: 0.4, fib: 4.8, micro: { mg: 16, fe: 0.6, zn: 0.3, ca: 22, b12: 0, biotin: 3 } },
+      { id: 'banane', name: 'Banane', cat: 'Zyklus & Glow', unit: 'g', defaultQty: 110, gutFriendly: true, kcal: 89, p: 1.1, kh: 20.0, f: 0.3, fib: 2.6, micro: { mg: 27, fe: 0.3, zn: 0.2, ca: 5, b12: 0, biotin: 4 } },
+      { id: 'zartbitterschoko', name: 'Zartbitterschokolade (70–85 %)', cat: 'Zyklus & Glow', unit: 'g', defaultQty: 20, gutFriendly: true, kcal: 560, p: 8.5, kh: 32.0, f: 42.0, fib: 11.0, micro: { mg: 228, fe: 11.9, zn: 3.3, ca: 73, b12: 0, biotin: 3 } },
+      { id: 'kuerbiskerne', name: 'Kürbiskerne', cat: 'Zyklus & Glow', unit: 'g', defaultQty: 20, gutFriendly: true, kcal: 559, p: 30.0, kh: 10.7, f: 49.0, fib: 6.0, micro: { mg: 535, fe: 8.8, zn: 7.8, ca: 46, b12: 0, biotin: 12 } },
+      { id: 'honig', name: 'Blütenhonig', cat: 'Obst & Toppings', unit: 'g', defaultQty: 12, gutFriendly: false, kcal: 304, p: 0.4, kh: 75.1, f: 0.0, fib: 0.2, micro: { mg: 2, fe: 0.4, zn: 0.2, ca: 6, b12: 0, biotin: 0 } },
+      { id: 'nutella', name: 'Nutella', cat: 'Obst & Toppings', unit: 'g', defaultQty: 20, gutFriendly: true, kcal: 539, p: 6.3, kh: 57.5, f: 30.9, fib: 3.4, micro: { mg: 55, fe: 2.8, zn: 1.1, ca: 110, b12: 0.2, biotin: 4 } }
+    ];
+
+    // =========================================================================
+    // 4. DEFAULT 1-CLICK MEALS FOR HER
+    // =========================================================================
+    const DEFAULT_PRESETS = [
+      {
+        id: 'preset_girl_jause',
+        name: 'Unsere Jause',
+        icon: '🥪',
+        items: [
+          { foodId: 'dinkelbrot', qty: 100 },
+          { foodId: 'frischkaese', qty: 20 },
+          { foodId: 'proteinkaese', qty: 60 },
+          { foodId: 'holies', qty: 40 },
+          { foodId: 'milch_35', qty: 200 }
+        ]
+      },
+      {
+        id: 'preset_pink_bowl',
+        name: 'Pink Berry Glow Bowl',
+        icon: '🍓',
+        items: [
+          { foodId: 'skyr', qty: 220 },
+          { foodId: 'haferflocken', qty: 45 },
+          { foodId: 'leinsamen', qty: 15 },
+          { foodId: 'beeren', qty: 120 },
+          { foodId: 'kuerbiskerne', qty: 15 }
+        ]
+      },
+      {
+        id: 'preset_luteal_cozy',
+        name: 'Cozy Luteal Porridge',
+        icon: '🍫',
+        items: [
+          { foodId: 'haferflocken', qty: 55 },
+          { foodId: 'milch_35', qty: 200 },
+          { foodId: 'whey', qty: 25 },
+          { foodId: 'banane', qty: 100 },
+          { foodId: 'zartbitterschoko', qty: 15 }
+        ]
+      },
+      {
+        id: 'preset_gym_bowl',
+        name: 'Lean Chicken & Rice',
+        icon: '🥗',
+        items: [
+          { foodId: 'huehnerbrust', qty: 160 },
+          { foodId: 'basmatireis', qty: 80 }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 5. HER PERSONAL SUPPLEMENT STACK (ESN D3/K2 + DOPPELHERZ HAAR + REIZDARM)
+    // =========================================================================
+    const GIRL_SUPPS = [
+      {
+        id: 'esn_d3k2',
+        name: 'ESN Vitamin D3 + K2',
+        subtitle: '2.500 IE (62,5 µg) D3 + 100 µg K2 MK-7 pro Kapsel',
+        timing: 'Zu fetthaltiger Mahlzeit (z. B. Jause)',
+        fatSoluble: true,
+        hasDoseStepper: true,
+        badge: 'Knochen & Immun',
+        micro: { d3: 62.5, k2: 100, mg: 0, fe: 0, zn: 0, ca: 0, b12: 0, biotin: 0 }
+      },
+      {
+        id: 'dh_haar',
+        name: 'Doppelherz Haar Intensiv + Biotin',
+        subtitle: '300 µg Biotin, 5 mg Zink, Kupfer, Selen & B-Vitamine',
+        timing: 'Täglich mit ausreichend Flüssigkeit',
+        fatSoluble: false,
+        badge: 'Hair & Glow',
+        micro: { d3: 0, k2: 0, mg: 0, fe: 0, zn: 5, ca: 0, b12: 2.5, biotin: 300 }
+      },
+      {
+        id: 'dh_reizdarm',
+        name: 'Doppelherz Reizdarm',
+        subtitle: 'Beruhigt die Darmflora & unterstützt die Verdauung',
+        timing: 'Regelmäßig zu einer Mahlzeit einnehmen',
+        fatSoluble: false,
+        badge: 'Bauch-Komfort',
+        micro: { d3: 0, k2: 0, mg: 0, fe: 0, zn: 2.5, ca: 0, b12: 1.5, biotin: 0 }
+      }
+    ];
+
+    const MICRO_TARGETS = [
+      { key: 'biotin', label: 'Biotin (Haare & Haut)', unit: 'µg', target: 300, color: '#ec4899' },
+      { key: 'd3',     label: 'Vitamin D3 (ESN)',     unit: 'µg', target: 62.5, color: '#f59e0b' },
+      { key: 'k2',     label: 'Vitamin K2 (ESN)',     unit: 'µg', target: 100, color: '#eab308' },
+      { key: 'zn',     label: 'Zink (Glow & Zyklus)', unit: 'mg', target: 12,  color: '#10b981' },
+      { key: 'mg',     label: 'Magnesium (Anti-Krampf)', unit: 'mg', target: 320, color: '#8b5cf6' },
+      { key: 'fe',     label: 'Eisen (Zyklus-Fokus)', unit: 'mg', target: 15,  color: '#f43f5e' },
+      { key: 'ca',     label: 'Calcium',              unit: 'mg', target: 1000, color: '#38bdf8' },
+      { key: 'b12',    label: 'Vitamin B12',          unit: 'µg', target: 4,   color: '#d946ef' }
+    ];
+
+    // =========================================================================
+    // 6. STATE MANAGEMENT & LOCALSTORAGE PERSISTENCE
+    // =========================================================================
+    const STORAGE_KEY = 'kittynutri_state_v1';
+
+    function getTodayISO(offsetDays = 0) {
+      const d = new Date();
+      d.setDate(d.getDate() + offsetDays);
+      return d.toISOString().split('T')[0];
+    }
+
+    const DEFAULT_STATE = {
+      activeTab: 'today',
+      selectedDate: getTodayISO(0),
+      theme: 'strawberry', // 'strawberry' | 'sakura' | 'y2k' | 'velvet'
+      goalMode: 'recomp',   // 'recomp' | 'cut' | 'bulk'
+      autoLutealBonus: true,
+      goals: {
+        recomp: { label: 'Recomp',    kcal: 2250, p: 155, kh: 235, f: 72, fib: 30, water: 2750 },
+        cut:    { label: 'Cut',       kcal: 1900, p: 160, kh: 175, f: 60, fib: 30, water: 2750 },
+        bulk:   { label: 'Lean Bulk', kcal: 2550, p: 155, kh: 305, f: 78, fib: 32, water: 3000 }
+      },
+      cycle: {
+        lastPeriodStart: getTodayISO(-10), // Default day 11 (Follicular) until user sets hers
+        cycleLength: 28,
+        periodLength: 5
+      },
+      foods: DEFAULT_FOODS,
+      presets: DEFAULT_PRESETS,
+      days: {} // dateISO -> { entries, supps, d3Caps, waterMl, cycleMood, cycleSymptom }
+    };
+
+    let state = loadState();
+    let searchFilter = '';
+    let categoryFilter = 'Alle';
+    let selectedCycleTabPhase = null;
+    let html5QrScanner = null;
+    let isScanning = false;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return JSON.parse(JSON.stringify(DEFAULT_STATE));
+        const parsed = JSON.parse(raw);
+        return {
+          ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+          ...parsed,
+          cycle: { ...DEFAULT_STATE.cycle, ...(parsed.cycle || {}) },
+          activeTab: parsed.activeTab || 'today',
+          selectedDate: parsed.selectedDate || getTodayISO(0)
+        };
+      } catch {
+        return JSON.parse(JSON.stringify(DEFAULT_STATE));
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function applyTheme(themeId) {
+      document.documentElement.setAttribute('data-theme', themeId === 'strawberry' ? '' : themeId);
+      const tObj = THEMES.find(t => t.id === themeId) || THEMES[0];
+      const meta = document.getElementById('metaThemeColor');
+      if (meta) meta.setAttribute('content', tObj.metaColor);
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.innerHTML = `${tObj.emoji} <span class="hidden sm:inline">${tObj.name.split(' ')[0]}</span>`;
+    }
+
+    function cycleTheme() {
+      const idx = THEMES.findIndex(t => t.id === state.theme);
+      const next = THEMES[(idx + 1) % THEMES.length];
+      state.theme = next.id;
+      saveState();
+      applyTheme(state.theme);
+      render();
+      showToast(`Theme: ${next.name}`, next.emoji);
+    }
+
+    // =========================================================================
+    // 7. CYCLE PHASE ENGINE (4 PHASES)
+    // =========================================================================
+    function getCycleStatusForDate(dateISO = state.selectedDate) {
+      const start = new Date(state.cycle.lastPeriodStart + 'T12:00:00');
+      const current = new Date(dateISO + 'T12:00:00');
+      const diffDays = Math.floor((current - start) / (1000 * 60 * 60 * 24));
+      const len = Math.max(21, Math.min(40, Number(state.cycle.cycleLength) || 28));
+      const pLen = Math.max(2, Math.min(9, Number(state.cycle.periodLength) || 5));
+
+      // Modulo cycle day (1..len)
+      const cycleDay = (((diffDays % len) + len) % len) + 1;
+      const ovulationDay = Math.max(pLen + 3, len - 14);
+
+      let phase;
+      if (cycleDay <= pLen) {
+        phase = CYCLE_PHASES[0]; // Menstruation
+      } else if (cycleDay < ovulationDay - 1) {
+        phase = CYCLE_PHASES[1]; // Follicular
+      } else if (cycleDay <= ovulationDay + 1) {
+        phase = CYCLE_PHASES[2]; // Ovulation
+      } else {
+        phase = CYCLE_PHASES[3]; // Luteal
+      }
+
+      const daysUntilPeriod = len - cycleDay + 1;
+      return { cycleDay, len, pLen, phase, daysUntilPeriod };
+    }
+
+    function getActiveGoals(dateISO = state.selectedDate) {
+      const base = { ...state.goals[state.goalMode] };
+      const cStatus = getCycleStatusForDate(dateISO);
+      if (state.autoLutealBonus && cStatus.phase.id === 'luteal') {
+        base.kcal += 150;
+        base.kh += 25;
+        base.f += 5;
+        base.lutealActive = true;
+      }
+      return base;
+    }
+
+    function getDayData(dateISO = state.selectedDate) {
+      if (!state.days[dateISO]) {
+        state.days[dateISO] = {
+          entries: [],
+          supps: {
+            esn_d3k2: false,
+            dh_haar: false,
+            dh_reizdarm: false
+          },
+          d3Caps: 1,
+          waterMl: 0,
+          cycleMood: null,
+          cycleSymptom: null
+        };
+      }
+      return state.days[dateISO];
+    }
+
+    function getFoodById(id) {
+      return state.foods.find(f => f.id === id);
+    }
+
+    function calcItemNutrition(food, qty) {
+      if (!food) return { kcal: 0, p: 0, kh: 0, f: 0, fib: 0, micro: {} };
+      const factor = food.isUnit ? qty : (qty / 100);
+      const m = food.micro || {};
+      return {
+        kcal: food.kcal * factor,
+        p: food.p * factor,
+        kh: food.kh * factor,
+        f: food.f * factor,
+        fib: (food.fib || 0) * factor,
+        micro: {
+          d3: (m.d3 || 0) * factor,
+          k2: (m.k2 || 0) * factor,
+          mg: (m.mg || 0) * factor,
+          fe: (m.fe || 0) * factor,
+          zn: (m.zn || 0) * factor,
+          ca: (m.ca || 0) * factor,
+          b12: (m.b12 || 0) * factor,
+          biotin: (m.biotin || 0) * factor
+        }
+      };
+    }
+
+    function calcDayTotals(dateISO = state.selectedDate) {
+      const day = getDayData(dateISO);
+      const totals = {
+        kcal: 0, p: 0, kh: 0, f: 0, fib: 0,
+        micro: { d3: 0, k2: 0, mg: 0, fe: 0, zn: 0, ca: 0, b12: 0, biotin: 0 }
+      };
+
+      day.entries.forEach(entry => {
+        const food = getFoodById(entry.foodId);
+        const n = calcItemNutrition(food, entry.qty);
+        totals.kcal += n.kcal;
+        totals.p += n.p;
+        totals.kh += n.kh;
+        totals.f += n.f;
+        totals.fib += n.fib;
+        Object.keys(totals.micro).forEach(k => {
+          totals.micro[k] += (n.micro[k] || 0);
+        });
+      });
+
+      GIRL_SUPPS.forEach(s => {
+        if (day.supps[s.id]) {
+          const mult = s.hasDoseStepper ? (day.d3Caps || 1) : 1;
+          Object.keys(totals.micro).forEach(k => {
+            totals.micro[k] += (s.micro[k] || 0) * mult;
+          });
+        }
+      });
+
+      return totals;
+    }
+
+    // =========================================================================
+    // 8. UI HELPERS & NAVIGATION
+    // =========================================================================
+    function showToast(text, icon = '🎀') {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastText').textContent = text;
+      document.getElementById('toastIcon').textContent = icon;
+      toast.classList.remove('opacity-0', '-translate-y-2');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-2');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2200);
+    }
+
+    function formatDateLabel(dateISO) {
+      const today = getTodayISO(0);
+      const yesterday = getTodayISO(-1);
+      if (dateISO === today) return 'Heute';
+      if (dateISO === yesterday) return 'Gestern';
+      const [y, m, d] = dateISO.split('-');
+      return `${d}.${m}.${y}`;
+    }
+
+    function shiftDate(delta) {
+      const d = new Date(state.selectedDate + 'T12:00:00');
+      d.setDate(d.getDate() + delta);
+      state.selectedDate = d.toISOString().split('T')[0];
+      saveState();
+      render();
+    }
+
+    function cycleGoalMode() {
+      const order = ['recomp', 'cut', 'bulk'];
+      const next = order[(order.indexOf(state.goalMode) + 1) % order.length];
+      state.goalMode = next;
+      saveState();
+      render();
+      const g = getActiveGoals();
+      showToast(`Ziel: ${g.label} (${g.kcal} kcal)`, '✨');
+    }
+
+    function switchTab(tab) {
+      if (isScanning && tab !== 'scan') stopScanner();
+      state.activeTab = tab;
+      saveState();
+      render();
+    }
+
+    function updateHeaderAndNav() {
+      const goal = getActiveGoals();
+      const badge = document.getElementById('phaseBadge');
+      badge.textContent = `${goal.label} • ${goal.kcal}`;
+      document.getElementById('currentDateLabel').textContent = formatDateLabel(state.selectedDate);
+      document.getElementById('headerKittyIcon').innerHTML = kittySVG(32);
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const active = btn.dataset.tab === state.activeTab;
+        btn.style.background = active ? 'var(--accent-soft)' : 'transparent';
+        btn.style.color = active ? 'var(--accent)' : 'var(--text-muted)';
+        btn.style.border = active ? '1px solid var(--glass-border)' : '1px solid transparent';
+      });
+    }
+
+    // =========================================================================
+    // 9. CORE ACTIONS
+    // =========================================================================
+    function addFoodEntry(foodId, qty, groupLabel = null) {
+      const food = getFoodById(foodId);
+      if (!food) return;
+      const day = getDayData();
+      day.entries.push({
+        id: 'ent_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+        foodId,
+        qty: Number(qty),
+        groupLabel
+      });
+      saveState();
+      render();
+      showToast(`${qty} ${food.unit} ${food.name} geloggt`, '🍓');
+    }
+
+    function applyPreset(presetId) {
+      const preset = state.presets.find(p => p.id === presetId);
+      if (!preset) return;
+      const day = getDayData();
+      preset.items.forEach((item, idx) => {
+        const food = getFoodById(item.foodId);
+        if (food) {
+          day.entries.push({
+            id: 'ent_' + Date.now() + '_' + idx + '_' + Math.random().toString(36).slice(2, 5),
+            foodId: item.foodId,
+            qty: Number(item.qty),
+            groupLabel: preset.name
+          });
+        }
+      });
+      saveState();
+      render();
+      showToast(`${preset.icon} ${preset.name} geloggt!`, '🎀');
+    }
+
+    function updateEntryQty(entryId, deltaOrValue, isAbsolute = false) {
+      const day = getDayData();
+      const entry = day.entries.find(e => e.id === entryId);
+      if (!entry) return;
+      const food = getFoodById(entry.foodId);
+      const step = food?.isUnit ? 0.5 : 5;
+      if (isAbsolute) {
+        const val = parseFloat(deltaOrValue);
+        if (!isNaN(val) && val > 0) entry.qty = val;
+      } else {
+        entry.qty = Math.max(step, Math.round((entry.qty + deltaOrValue) * 10) / 10);
+      }
+      saveState();
+      render();
+    }
+
+    function removeEntry(entryId) {
+      const day = getDayData();
+      day.entries = day.entries.filter(e => e.id !== entryId);
+      saveState();
+      render();
+      showToast('Eintrag entfernt', '🗑️');
+    }
+
+    function addWater(ml) {
+      const day = getDayData();
+      day.waterMl = Math.max(0, (day.waterMl || 0) + ml);
+      saveState();
+      render();
+      if (ml > 0) showToast(`+${ml} ml Wasser`, '💧');
+    }
+
+    function toggleSupp(suppId) {
+      const day = getDayData();
+      day.supps[suppId] = !day.supps[suppId];
+      saveState();
+      render();
+      const supp = GIRL_SUPPS.find(s => s.id === suppId);
+      if (day.supps[suppId] && supp) {
+        showToast(`${supp.name} abgehakt!`, '💖');
+      }
+    }
+
+    function changeD3Caps(delta) {
+      const day = getDayData();
+      day.d3Caps = Math.min(3, Math.max(1, (day.d3Caps || 1) + delta));
+      saveState();
+      render();
+    }
+
+    // =========================================================================
+    // 10. VIEW 1: HEUTE (DASHBOARD + CYCLE BANNER + 1-KLICK MEALS)
+    // =========================================================================
+    function renderTodayView() {
+      const day = getDayData();
+      const totals = calcDayTotals();
+      const goal = getActiveGoals();
+      const cStatus = getCycleStatusForDate();
+
+      const kcalPct = Math.min(100, Math.round((totals.kcal / goal.kcal) * 100));
+      const pPct = Math.min(100, Math.round((totals.p / goal.p) * 100));
+      const khPct = Math.min(100, Math.round((totals.kh / goal.kh) * 100));
+      const fPct = Math.min(100, Math.round((totals.f / goal.f) * 100));
+      const fibPct = Math.min(100, Math.round((totals.fib / goal.fib) * 100));
+      const waterPct = Math.min(100, Math.round(((day.waterMl || 0) / goal.water) * 100));
+      const remainingKcal = Math.round(goal.kcal - totals.kcal);
+
+      const suppsDoneCount = GIRL_SUPPS.filter(s => day.supps[s.id]).length;
+
+      const presetsHTML = state.presets.map(preset => {
+        let pKcal = 0, pProt = 0, pFib = 0;
+        preset.items.forEach(it => {
+          const n = calcItemNutrition(getFoodById(it.foodId), it.qty);
+          pKcal += n.kcal; pProt += n.p; pFib += n.fib;
+        });
+        return `
+          <div onclick="applyPreset('${preset.id}')" class="glass-card shrink-0 w-[166px] p-3.5 rounded-2xl cursor-pointer active:scale-95 transition-transform flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="text-xl">${preset.icon}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-soft text-accent">+1 Klick</span>
+              </div>
+              <div class="text-xs font-extrabold text-main leading-snug line-clamp-1">${preset.name}</div>
+              <div class="text-[10px] text-muted mt-0.5">${preset.items.length} Zutaten</div>
+            </div>
+            <div class="mt-3 pt-2 border-t border-pink-400/20 flex items-center justify-between text-[11px] font-bold">
+              <span class="text-accent">${Math.round(pKcal)} kcal</span>
+              <span class="text-emerald-600 dark:text-emerald-300">${pProt.toFixed(0)}g P</span>
+              <span class="text-pink-500">${pFib.toFixed(1)}g B</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const entriesHTML = day.entries.length === 0
+        ? `
+          <div class="glass-subtle rounded-2xl p-6 text-center">
+            <div class="flex justify-center mb-2">${kittySVG(44)}</div>
+            <div class="text-xs font-extrabold text-main">Noch nichts für heute eingetragen</div>
+            <p class="text-[11px] text-muted mt-1">Logge oben <span class="text-accent font-bold">Unsere Jause</span> mit 1 Klick oder scanne deinen Snack!</p>
+          </div>
+        `
+        : day.entries.map(entry => {
+            const food = getFoodById(entry.foodId);
+            if (!food) return '';
+            const n = calcItemNutrition(food, entry.qty);
+            const step = food.isUnit ? 0.5 : 10;
+            return `
+              <div class="glass-card p-3 rounded-2xl flex items-center justify-between gap-2.5">
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-xs font-extrabold text-main truncate">${food.name}</span>
+                    ${food.gutFriendly ? `<span title="Bauch- & Reizdarmfreundlich" class="text-[10px]">🌿</span>` : ''}
+                    ${entry.groupLabel ? `<span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-accent-soft text-accent shrink-0">${entry.groupLabel}</span>` : ''}
+                  </div>
+                  <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1 text-[11px] font-semibold">
+                    <span class="font-extrabold text-accent">${Math.round(n.kcal)} kcal</span>
+                    <span class="text-emerald-600">${n.p.toFixed(1)}g P</span>
+                    <span class="text-amber-600">${n.kh.toFixed(1)}g KH</span>
+                    <span class="text-rose-500">${n.f.toFixed(1)}g F</span>
+                    <span class="text-pink-600">${n.fib.toFixed(1)}g B</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-1 shrink-0">
+                  <button onclick="updateEntryQty('${entry.id}', -${step})" class="w-7 h-7 rounded-xl glass-subtle text-main font-extrabold text-sm flex items-center justify-center">−</button>
+                  <div class="flex items-center theme-input rounded-xl px-1.5 py-1">
+                    <input type="number" step="any" value="${entry.qty}" onchange="updateEntryQty('${entry.id}', this.value, true)" class="w-9 bg-transparent text-center text-xs font-extrabold text-main focus:outline-none" />
+                    <span class="text-[10px] text-muted pr-0.5">${food.unit}</span>
+                  </div>
+                  <button onclick="updateEntryQty('${entry.id}', ${step})" class="w-7 h-7 rounded-xl glass-subtle text-main font-extrabold text-sm flex items-center justify-center">+</button>
+                  <button onclick="removeEntry('${entry.id}')" class="w-6 h-7 rounded-xl text-soft hover:text-rose-500 flex items-center justify-center ml-0.5 font-bold">✕</button>
+                </div>
+              </div>
+            `;
+          }).join('');
+
+      return `
+        <div class="tab-view space-y-4">
+          <!-- Cycle Phase Mini Banner -->
+          <div onclick="switchTab('cycle')" class="glass-card rounded-2xl p-3 flex items-center justify-between gap-2.5 cursor-pointer active:scale-[0.99] transition-transform">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-9 h-9 rounded-2xl flex items-center justify-center text-lg shrink-0" style="background: ${cStatus.phase.color}22; border: 1px solid ${cStatus.phase.color}44;">
+                ${cStatus.phase.icon}
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-extrabold text-main truncate">Tag ${cStatus.cycleDay} • ${cStatus.phase.name}</span>
+                  ${goal.lutealActive ? `<span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-purple-500/20 text-purple-600">+150 kcal Puffer</span>` : ''}
+                </div>
+                <div class="text-[11px] text-muted truncate">Fokus: ${cStatus.phase.nutrients.slice(0, 2).join(' & ')} → Food-Tipps</div>
+              </div>
+            </div>
+            <span class="text-xs font-extrabold text-accent shrink-0">›</span>
+          </div>
+
+          <!-- Hero Calorie & Macro Glass Card -->
+          <section class="glass-card rounded-[28px] p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+              <div>
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-muted flex items-center gap-1">
+                  ${bowBadgeSVG(15)} Tagesbilanz
+                </span>
+                <div class="flex items-baseline gap-2 mt-0.5">
+                  <span class="text-3xl font-extrabold tracking-tight text-main">${Math.round(totals.kcal).toLocaleString('de-DE')}</span>
+                  <span class="text-xs font-bold text-muted">/ ${goal.kcal.toLocaleString('de-DE')} kcal</span>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-full bg-accent-soft text-accent">
+                  ${remainingKcal >= 0 ? `${remainingKcal} kcal offen` : `+${Math.abs(remainingKcal)} kcal drüber`}
+                </span>
+                <div class="text-[11px] font-semibold text-muted mt-1">${kcalPct} % geschafft</div>
+              </div>
+            </div>
+
+            <!-- Main Calorie Progress Bar -->
+            <div class="w-full h-3 rounded-full bar-track overflow-hidden mb-4">
+              <div class="h-full rounded-full transition-all duration-500" style="width: ${kcalPct}%; background: linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+            </div>
+
+            <!-- 4 Macro & Fiber Tiles -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <div class="glass-subtle rounded-2xl p-2.5">
+                <div class="flex justify-between items-center text-[11px]">
+                  <span class="font-extrabold text-emerald-600">Protein (Gym & Glow)</span>
+                  <span class="text-muted font-bold">${pPct}%</span>
+                </div>
+                <div class="text-sm font-extrabold text-main mt-0.5">${totals.p.toFixed(1)} <span class="text-[11px] font-semibold text-muted">/ ${goal.p}g</span></div>
+                <div class="w-full h-1.5 rounded-full bar-track mt-1.5 overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width:${pPct}%"></div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl p-2.5 bg-accent-soft border border-pink-400/35">
+                <div class="flex justify-between items-center text-[11px]">
+                  <span class="font-extrabold text-accent">Ballaststoffe (Bauch)</span>
+                  <span class="text-accent font-extrabold">${fibPct}%</span>
+                </div>
+                <div class="text-sm font-extrabold text-main mt-0.5">${totals.fib.toFixed(1)} <span class="text-[11px] font-semibold text-muted">/ ${goal.fib}g</span></div>
+                <div class="w-full h-1.5 rounded-full bar-track mt-1.5 overflow-hidden">
+                  <div class="h-full rounded-full transition-all duration-500" style="width:${fibPct}%; background: var(--accent);"></div>
+                </div>
+              </div>
+
+              <div class="glass-subtle rounded-2xl p-2.5">
+                <div class="flex justify-between items-center text-[11px]">
+                  <span class="font-extrabold text-amber-600">Kohlenhydrate</span>
+                  <span class="text-muted font-bold">${khPct}%</span>
+                </div>
+                <div class="text-sm font-extrabold text-main mt-0.5">${totals.kh.toFixed(1)} <span class="text-[11px] font-semibold text-muted">/ ${goal.kh}g</span></div>
+                <div class="w-full h-1.5 rounded-full bar-track mt-1.5 overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full transition-all duration-500" style="width:${khPct}%"></div>
+                </div>
+              </div>
+
+              <div class="glass-subtle rounded-2xl p-2.5">
+                <div class="flex justify-between items-center text-[11px]">
+                  <span class="font-extrabold text-rose-500">Fette (Hormone)</span>
+                  <span class="text-muted font-bold">${fPct}%</span>
+                </div>
+                <div class="text-sm font-extrabold text-main mt-0.5">${totals.f.toFixed(1)} <span class="text-[11px] font-semibold text-muted">/ ${goal.f}g</span></div>
+                <div class="w-full h-1.5 rounded-full bar-track mt-1.5 overflow-hidden">
+                  <div class="h-full bg-rose-500 rounded-full transition-all duration-500" style="width:${fPct}%"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Hydration & Supplements Quick Row -->
+          <section class="grid grid-cols-2 gap-2.5">
+            <div class="glass-card rounded-2xl p-3 flex flex-col justify-between">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-extrabold text-sky-600">💧 Hydration</span>
+                <span class="text-[10px] font-bold text-muted">${waterPct}%</span>
+              </div>
+              <div class="text-sm font-extrabold text-main my-1">${((day.waterMl || 0) / 1000).toFixed(2)} <span class="text-[11px] font-semibold text-muted">/ ${(goal.water / 1000).toFixed(2)} L</span></div>
+              <div class="flex gap-1.5 mt-1">
+                <button onclick="addWater(250)" class="flex-1 py-1 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/30 text-[11px] font-extrabold text-sky-700">+250</button>
+                <button onclick="addWater(500)" class="flex-1 py-1 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 border border-sky-400/30 text-[11px] font-extrabold text-sky-700">+500</button>
+              </div>
+            </div>
+
+            <div onclick="switchTab('supps')" class="glass-card rounded-2xl p-3 flex flex-col justify-between cursor-pointer">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-extrabold text-accent">💊 Glow & Darm</span>
+                <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded-full bg-accent-soft text-accent">${suppsDoneCount}/${GIRL_SUPPS.length}</span>
+              </div>
+              <div class="text-xs font-bold text-muted my-1 leading-tight">
+                ${suppsDoneCount === GIRL_SUPPS.length ? 'Alle Supplements erledigt 💖' : 'ESN D3/K2 & Doppelherz'}
+              </div>
+              <div class="flex gap-1 mt-1">
+                ${GIRL_SUPPS.map(s => `<div class="h-1.5 flex-1 rounded-full ${day.supps[s.id] ? 'bg-pink-500' : 'bar-track'}"></div>`).join('')}
+              </div>
+            </div>
+          </section>
+
+          <!-- 1-Click Meals Carousel -->
+          <section>
+            <div class="flex items-center justify-between mb-2">
+              <h2 class="text-xs font-extrabold uppercase tracking-wider text-muted flex items-center gap-1.5">
+                🎀 1-Klick Mahlzeiten
+              </h2>
+              <button onclick="openPresetEditorModal()" class="text-[11px] font-extrabold text-accent">
+                + Konfigurieren
+              </button>
+            </div>
+            <div class="flex gap-2.5 overflow-x-auto no-scrollbar pb-1">
+              ${presetsHTML}
+            </div>
+          </section>
+
+          <!-- Today's Food Log -->
+          <section class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xs font-extrabold uppercase tracking-wider text-muted">Heutiges Log (${day.entries.length})</h2>
+              ${day.entries.length > 0 ? `
+                <button onclick="saveCurrentDayAsPreset()" class="text-[11px] font-extrabold text-accent bg-accent-soft px-2.5 py-1 rounded-xl">
+                  💾 Als 1-Klick speichern
+                </button>
+              ` : ''}
+            </div>
+            <div class="space-y-2">
+              ${entriesHTML}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 11. VIEW 2: 4-PHASEN ZYKLUSTRACKER + FOOD EMPFEHLUNGEN
+    // =========================================================================
+    function renderCycleView() {
+      const cStatus = getCycleStatusForDate();
+      const day = getDayData();
+      const activePhaseId = selectedCycleTabPhase || cStatus.phase.id;
+      const viewedPhase = CYCLE_PHASES.find(p => p.id === activePhaseId) || cStatus.phase;
+
+      const moods = ['✨ Top', '😊 Gut', '😴 Müde', '🍫 Cravings', '😣 Bauch/Krämpfe'];
+
+      const phaseTabsHTML = CYCLE_PHASES.map(p => {
+        const isCurrent = p.id === cStatus.phase.id;
+        const isViewed = p.id === viewedPhase.id;
+        return `
+          <button onclick="selectedCycleTabPhase = '${p.id}'; render();" class="p-2.5 rounded-2xl text-left transition-all relative ${isViewed ? 'glass-card ring-2 ring-pink-400' : 'glass-subtle opacity-80'}">
+            <div class="flex items-center justify-between">
+              <span class="text-lg">${p.icon}</span>
+              ${isCurrent ? `<span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded-full bg-pink-500 text-white">Jetzt</span>` : ''}
+            </div>
+            <div class="text-xs font-extrabold text-main mt-1">${p.short}</div>
+            <div class="text-[10px] font-semibold text-muted">${p.daysLabel}</div>
+          </button>
+        `;
+      }).join('');
+
+      const recommendedFoodsHTML = viewedPhase.suggestedFoods.map(sf => {
+        const food = getFoodById(sf.foodId);
+        if (!food) return '';
+        return `
+          <div class="glass-subtle p-3 rounded-2xl flex items-center justify-between gap-2.5">
+            <div class="min-w-0 flex-1">
+              <div class="text-xs font-extrabold text-main">${food.name}</div>
+              <div class="text-[11px] text-muted mt-0.5">${sf.reason}</div>
+              <div class="text-[10px] font-bold text-accent mt-0.5">${food.defaultQty}${food.unit}: ${Math.round(food.kcal * food.defaultQty / 100)} kcal • ${(food.p * food.defaultQty / 100).toFixed(1)}g P • ${((food.fib || 0) * food.defaultQty / 100).toFixed(1)}g B</div>
+            </div>
+            <button onclick="addFoodEntry('${food.id}', ${food.defaultQty}, '${viewedPhase.short}')" class="shrink-0 px-3 py-2 rounded-xl bg-accent-soft text-accent font-extrabold text-xs border border-pink-400/30">
+              + Log
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="tab-view space-y-4">
+          <!-- Cycle Status Hero Card -->
+          <section class="glass-card rounded-[28px] p-4 relative overflow-hidden">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-accent">Zyklustracker</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-soft text-accent">Tag ${cStatus.cycleDay} von ${cStatus.len}</span>
+                </div>
+                <h2 class="text-xl font-extrabold text-main mt-1 flex items-center gap-1.5">
+                  ${cStatus.phase.icon} ${cStatus.phase.name}
+                </h2>
+                <p class="text-xs font-semibold text-muted mt-0.5">
+                  Nächste Periode voraussichtlich in <b class="text-main">${cStatus.daysUntilPeriod} Tagen</b>
+                </p>
+              </div>
+              <div class="shrink-0">
+                ${kittySVG(54)}
+              </div>
+            </div>
+
+            <!-- Period Start Quick Action & Settings -->
+            <div class="grid grid-cols-2 gap-2 mt-3.5 pt-3 border-t border-pink-400/20">
+              <button onclick="logPeriodStartedToday()" class="py-2 px-3 rounded-2xl bg-rose-500 text-white text-xs font-extrabold shadow-sm active:scale-95 transition-transform">
+                🌺 Periode startet heute
+              </button>
+              <button onclick="openCycleSettingsModal()" class="py-2 px-3 rounded-2xl glass-subtle text-main text-xs font-extrabold">
+                ⚙️ Zyklusdaten anpassen
+              </button>
+            </div>
+          </section>
+
+          <!-- Daily Mood & Body Check-in -->
+          <section class="glass-card rounded-2xl p-3.5 space-y-2">
+            <div class="text-xs font-extrabold text-main">Wie fühlst du dich heute? (${formatDateLabel(state.selectedDate)})</div>
+            <div class="flex flex-wrap gap-1.5">
+              ${moods.map(m => `
+                <button onclick="getDayData().cycleMood = '${m}'; saveState(); render(); showToast('Check-in gespeichert', '🌸');" class="px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${day.cycleMood === m ? 'bg-pink-500 text-white shadow-sm' : 'glass-subtle text-main'}">
+                  ${m}
+                </button>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 4 Phases Selector Grid -->
+          <section class="space-y-2.5">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-muted">Die 4 Zyklusphasen antippen</h3>
+            <div class="grid grid-cols-2 gap-2">
+              ${phaseTabsHTML}
+            </div>
+          </section>
+
+          <!-- Selected Phase Details & Food Recommendations -->
+          <section class="glass-card rounded-[26px] p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="text-sm font-extrabold text-main">${viewedPhase.icon} ${viewedPhase.name} (${viewedPhase.daysLabel})</h3>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">${viewedPhase.hormoneInfo}</p>
+
+            <div class="grid grid-cols-1 gap-2">
+              <div class="glass-subtle rounded-2xl p-2.5 text-[11px]">
+                <span class="font-extrabold text-accent">🏋️‍♀️ Gym-Tipp:</span> <span class="text-main font-medium">${viewedPhase.gymTip}</span>
+              </div>
+              <div class="glass-subtle rounded-2xl p-2.5 text-[11px]">
+                <span class="font-extrabold text-emerald-600">🌿 Bauch & Reizdarm:</span> <span class="text-main font-medium">${viewedPhase.gutTip}</span>
+              </div>
+            </div>
+
+            <div class="pt-1">
+              <div class="text-xs font-extrabold text-main mb-2">Empfohlene Lebensmittel für diese Phase:</div>
+              <div class="space-y-2">
+                ${recommendedFoodsHTML}
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function logPeriodStartedToday() {
+      state.cycle.lastPeriodStart = state.selectedDate;
+      selectedCycleTabPhase = 'menstruation';
+      saveState();
+      render();
+      showToast('Tag 1 (Menstruation) eingetragen 💖', '🌺');
+    }
+
+    function openCycleSettingsModal() {
+      openModal(`
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-main">🌸 Zyklusdaten einstellen</h3>
+            <button onclick="closeModal()" class="w-8 h-8 rounded-full glass-subtle text-main flex items-center justify-center font-bold">✕</button>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <label class="text-[11px] font-bold text-muted">Erster Tag der letzten Periode</label>
+              <input id="cyStart" type="date" value="${state.cycle.lastPeriodStart}" class="w-full mt-1 theme-input rounded-2xl px-3.5 py-2.5 text-xs font-bold" />
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
+              <div>
+                <label class="text-[11px] font-bold text-muted">Zykluslänge (Tage)</label>
+                <input id="cyLen" type="number" min="21" max="40" value="${state.cycle.cycleLength}" class="w-full mt-1 theme-input rounded-2xl px-3.5 py-2.5 text-xs font-bold" />
+              </div>
+              <div>
+                <label class="text-[11px] font-bold text-muted">Periodendauer (Tage)</label>
+                <input id="cyPeriodLen" type="number" min="2" max="9" value="${state.cycle.periodLength}" class="w-full mt-1 theme-input rounded-2xl px-3.5 py-2.5 text-xs font-bold" />
+              </div>
+            </div>
+            <label class="flex items-center gap-2.5 glass-subtle p-3 rounded-2xl cursor-pointer">
+              <input id="cyLutealToggle" type="checkbox" ${state.autoLutealBonus ? 'checked' : ''} class="w-4 h-4 accent-pink-500" />
+              <span class="text-xs font-bold text-main">Automatischer Luteal-Puffer (+150 kcal in Phase 4)</span>
+            </label>
+            <button onclick="saveCycleSettings()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="w-full py-3 rounded-2xl text-xs font-extrabold text-white shadow-md">
+              Speichern
+            </button>
+          </div>
+        </div>
+      `);
+    }
+
+    function saveCycleSettings() {
+      state.cycle.lastPeriodStart = document.getElementById('cyStart').value || getTodayISO(0);
+      state.cycle.cycleLength = Number(document.getElementById('cyLen').value) || 28;
+      state.cycle.periodLength = Number(document.getElementById('cyPeriodLen').value) || 5;
+      state.autoLutealBonus = document.getElementById('cyLutealToggle').checked;
+      selectedCycleTabPhase = null;
+      saveState();
+      closeModal();
+      render();
+      showToast('Zyklusdaten aktualisiert!', '🌸');
+    }
+
+    // =========================================================================
+    // 12. VIEW 3: BARCODE SCANNER & LEBENSMITTEL
+    // =========================================================================
+    function renderScanView() {
+      const categories = ['Alle', 'Zyklus & Glow', 'Brot & Getreide', 'Milch & Käse', 'Protein & Shakes', 'Obst & Toppings', 'Gescannt & Eigene'];
+      const filteredFoods = state.foods.filter(f => {
+        const matchesSearch = f.name.toLowerCase().includes(searchFilter.toLowerCase());
+        const matchesCat = categoryFilter === 'Alle' || f.cat === categoryFilter;
+        return matchesSearch && matchesCat;
+      });
+
+      return `
+        <div class="tab-view space-y-4">
+          <section class="glass-card rounded-[26px] p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-sm font-extrabold text-main flex items-center gap-1.5">📷 Open Food Facts Scanner</h2>
+                <p class="text-[11px] text-muted">Barcode scannen & automatisch speichern</p>
+              </div>
+              <button onclick="toggleBarcodeCamera()" id="cameraToggleBtn" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="px-3.5 py-2 rounded-2xl text-xs font-extrabold text-white shadow-sm">
+                ${isScanning ? 'Kamera stoppen' : 'Kamera starten'}
+              </button>
+            </div>
+
+            <div id="scannerContainer" class="${isScanning ? 'block' : 'hidden'} rounded-2xl overflow-hidden bg-black/50 border border-pink-400/30">
+              <div id="qr-reader" class="w-full"></div>
+            </div>
+
+            <div class="flex gap-2">
+              <input id="manualBarcodeInput" type="text" inputmode="numeric" placeholder="Oder EAN-Code eingeben..." class="flex-1 theme-input rounded-2xl px-3.5 py-2.5 text-xs font-semibold" />
+              <button onclick="lookupManualBarcode()" class="glass-pill px-4 py-2.5 rounded-2xl text-xs font-extrabold text-accent">
+                Suchen
+              </button>
+            </div>
+            <div id="barcodeStatus" class="hidden text-xs p-3 rounded-2xl glass-subtle"></div>
+          </section>
+
+          <section class="space-y-3">
+            <div class="flex gap-2">
+              <div class="relative flex-1">
+                <input type="text" value="${searchFilter}" oninput="searchFilter = this.value; renderFoodListOnly();" placeholder="Suchen (z. B. Holies, Skyr, Schoko)..." class="w-full theme-input rounded-2xl pl-9 pr-3.5 py-2.5 text-xs font-semibold" />
+                <span class="absolute left-3 top-2.5 text-xs">🔍</span>
+              </div>
+              <button onclick="openNewFoodModal()" class="glass-pill px-3.5 py-2.5 rounded-2xl text-xs font-extrabold text-accent shrink-0">
+                + Neu
+              </button>
+            </div>
+
+            <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+              ${categories.map(cat => `
+                <button onclick="categoryFilter = '${cat}'; render();" class="shrink-0 px-3 py-1.5 rounded-full text-[11px] font-bold transition-all ${categoryFilter === cat ? 'bg-pink-500 text-white shadow-sm' : 'glass-subtle text-muted'}">
+                  ${cat}
+                </button>
+              `).join('')}
+            </div>
+
+            <div id="foodListContainer" class="space-y-2">
+              ${renderFoodItemsList(filteredFoods)}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    function renderFoodItemsList(list) {
+      if (list.length === 0) {
+        return `<div class="glass-subtle rounded-2xl p-5 text-center text-xs text-muted">Keine Treffer. Über <span class="text-accent font-extrabold">+ Neu</span> kannst du es selbst anlegen.</div>`;
+      }
+      return list.map(food => `
+        <div class="glass-card p-3 rounded-2xl flex items-center justify-between gap-2">
+          <div class="min-w-0 flex-1">
+            <div class="text-xs font-extrabold text-main truncate flex items-center gap-1">
+              ${food.name} ${food.gutFriendly ? '<span title="Reizdarmfreundlich" class="text-[10px]">🌿</span>' : ''}
+            </div>
+            <div class="text-[10px] text-muted font-semibold mt-0.5">
+              Pro 100${food.unit}: <span class="text-accent font-bold">${food.kcal} kcal</span> • ${food.p}g P • ${food.kh}g KH • ${food.f}g F • ${food.fib || 0}g B
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <input id="qty_input_${food.id}" type="number" step="any" value="${food.defaultQty}" class="w-14 theme-input rounded-xl py-1.5 px-2 text-center text-xs font-extrabold" />
+            <span class="text-[10px] text-muted w-5">${food.unit}</span>
+            <button onclick="addFoodEntry('${food.id}', document.getElementById('qty_input_${food.id}').value)" class="px-3 py-1.5 rounded-xl bg-accent-soft text-accent font-extrabold text-xs border border-pink-400/30">
+              +
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderFoodListOnly() {
+      const container = document.getElementById('foodListContainer');
+      if (!container) return;
+      const filteredFoods = state.foods.filter(f => {
+        const matchesSearch = f.name.toLowerCase().includes(searchFilter.toLowerCase());
+        const matchesCat = categoryFilter === 'Alle' || f.cat === categoryFilter;
+        return matchesSearch && matchesCat;
+      });
+      container.innerHTML = renderFoodItemsList(filteredFoods);
+    }
+
+    function toggleBarcodeCamera() {
+      if (isScanning) stopScanner();
+      else startScanner();
+    }
+
+    function startScanner() {
+      const container = document.getElementById('scannerContainer');
+      const btn = document.getElementById('cameraToggleBtn');
+      if (!container) return;
+      container.classList.remove('hidden');
+      isScanning = true;
+      if (btn) btn.textContent = 'Kamera stoppen';
+
+      if (typeof Html5Qrcode === 'undefined') {
+        showBarcodeStatus('Scanner lädt noch – nutze das EAN-Eingabefeld.');
+        return;
+      }
+
+      html5QrScanner = new Html5Qrcode('qr-reader');
+      html5QrScanner.start(
+        { facingMode: 'environment' },
+        { fps: 10, qrbox: { width: 250, height: 140 } },
+        (decodedText) => {
+          stopScanner();
+          fetchOpenFoodFacts(decodedText);
+        },
+        () => {}
+      ).catch(() => {
+        isScanning = false;
+        container.classList.add('hidden');
+        if (btn) btn.textContent = 'Kamera starten';
+        showBarcodeStatus('Kamerazugriff nicht möglich (HTTPS erforderlich). Nutze unten das EAN-Feld.');
+      });
+    }
+
+    function stopScanner() {
+      if (html5QrScanner && isScanning) {
+        html5QrScanner.stop().then(() => html5QrScanner.clear()).catch(() => {});
+      }
+      isScanning = false;
+      const container = document.getElementById('scannerContainer');
+      const btn = document.getElementById('cameraToggleBtn');
+      if (container) container.classList.add('hidden');
+      if (btn) btn.textContent = 'Kamera starten';
+    }
+
+    function lookupManualBarcode() {
+      const code = (document.getElementById('manualBarcodeInput')?.value || '').trim();
+      if (!code) return showToast('Bitte EAN eingeben', '⚠️');
+      fetchOpenFoodFacts(code);
+    }
+
+    function showBarcodeStatus(html) {
+      const box = document.getElementById('barcodeStatus');
+      if (!box) return;
+      box.classList.remove('hidden');
+      box.innerHTML = html;
+    }
+
+    async function fetchOpenFoodFacts(barcode) {
+      showBarcodeStatus(`Suche Barcode <b>${barcode}</b>...`);
+      try {
+        const res = await fetch(`https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(barcode)}.json`);
+        const data = await res.json();
+        if (data.status !== 1 || !data.product) {
+          showBarcodeStatus(`Produkt für <b>${barcode}</b> nicht gefunden. Über <b>+ Neu</b> anlegen!`);
+          return;
+        }
+        const p = data.product;
+        const nutr = p.nutriments || {};
+        const name = (p.product_name_de || p.product_name || 'Gescanntes Produkt') + (p.brands ? ` (${p.brands.split(',')[0]})` : '');
+        const kcal = Math.round(nutr['energy-kcal_100g'] || (nutr['energy_100g'] ? nutr['energy_100g'] / 4.184 : 0));
+        const protein = Number((nutr['proteins_100g'] || 0).toFixed(1));
+        const carbs = Number((nutr['carbohydrates_100g'] || 0).toFixed(1));
+        const fat = Number((nutr['fat_100g'] || 0).toFixed(1));
+        const fiber = Number((nutr['fiber_100g'] || 0).toFixed(1));
+
+        const newId = 'off_' + barcode;
+        const existingIdx = state.foods.findIndex(f => f.id === newId);
+        const foodObj = {
+          id: newId, name, cat: 'Gescannt & Eigene', unit: 'g', defaultQty: 100, gutFriendly: true,
+          kcal, p: protein, kh: carbs, f: fat, fib: fiber,
+          micro: {
+            ca: Math.round((nutr['calcium_100g'] || 0) * 1000),
+            mg: Math.round((nutr['magnesium_100g'] || 0) * 1000),
+            fe: Number(((nutr['iron_100g'] || 0) * 1000).toFixed(1)),
+            zn: Number(((nutr['zinc_100g'] || 0) * 1000).toFixed(1)),
+            b12: Number(((nutr['vitamin-b12_100g'] || 0) * 1000000).toFixed(1)),
+            biotin: 0
+          }
+        };
+        if (existingIdx >= 0) state.foods[existingIdx] = foodObj;
+        else state.foods.unshift(foodObj);
+        saveState();
+        renderFoodListOnly();
+
+        showBarcodeStatus(`
+          <div class="font-extrabold text-main mb-1">✅ ${name}</div>
+          <div class="text-[11px] text-muted mb-2">Pro 100g: ${kcal} kcal • ${protein}g P • ${carbs}g KH • ${fat}g F • ${fiber}g B</div>
+          <div class="flex items-center gap-2">
+            <input id="scannedAddQty" type="number" value="100" class="w-20 theme-input rounded-xl px-2.5 py-1.5 text-xs font-extrabold text-center" />
+            <span class="text-xs text-muted">g</span>
+            <button onclick="addFoodEntry('${newId}', document.getElementById('scannedAddQty').value)" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-extrabold text-white">
+              Jetzt loggen
+            </button>
+          </div>
+        `);
+      } catch {
+        showBarcodeStatus('Netzwerkfehler bei Open Food Facts.');
+      }
+    }
+
+    // =========================================================================
+    // 13. VIEW 4: HER SUPPLEMENTS & GLOW / BAUCH MIKRONÄHRSTOFFE
+    // =========================================================================
+    function renderSuppsView() {
+      const day = getDayData();
+      const totals = calcDayTotals();
+      const hasEnoughFat = totals.f >= 8;
+
+      const stackCards = GIRL_SUPPS.map(s => {
+        const checked = !!day.supps[s.id];
+        return `
+          <div onclick="toggleSupp('${s.id}')" class="glass-card p-3.5 rounded-2xl cursor-pointer transition-all ${checked ? 'ring-2 ring-pink-400' : ''}">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-xl flex items-center justify-center border font-extrabold text-xs ${checked ? 'bg-pink-500 text-white border-pink-400' : 'glass-subtle text-transparent'}">
+                  ✓
+                </div>
+                <div>
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    <span class="text-xs font-extrabold text-main">${s.name}</span>
+                    <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-accent-soft text-accent">${s.badge}</span>
+                  </div>
+                  <div class="text-[11px] font-semibold text-muted mt-0.5">${s.subtitle}</div>
+                  <div class="text-[10px] text-soft mt-0.5">⏰ ${s.timing}</div>
+                </div>
+              </div>
+
+              ${s.hasDoseStepper ? `
+                <div onclick="event.stopPropagation()" class="flex items-center gap-1 glass-subtle rounded-xl p-1">
+                  <button onclick="changeD3Caps(-1)" class="w-6 h-6 rounded-lg bg-accent-soft text-xs font-extrabold text-accent">−</button>
+                  <span class="text-xs font-extrabold text-main px-1.5">${day.d3Caps || 1}x</span>
+                  <button onclick="changeD3Caps(1)" class="w-6 h-6 rounded-lg bg-accent-soft text-xs font-extrabold text-accent">+</button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const microBars = MICRO_TARGETS.map(m => {
+        const val = totals.micro[m.key] || 0;
+        const pct = Math.min(100, Math.round((val / m.target) * 100));
+        return `
+          <div class="space-y-1">
+            <div class="flex justify-between text-[11px]">
+              <span class="font-extrabold text-main">${m.label}</span>
+              <span class="text-muted font-bold">${val < 10 ? val.toFixed(1) : Math.round(val)} / ${m.target} ${m.unit} (${pct}%)</span>
+            </div>
+            <div class="w-full h-2 rounded-full bar-track overflow-hidden">
+              <div class="h-full rounded-full transition-all duration-500" style="width: ${pct}%; background: ${m.color};"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="tab-view space-y-4">
+          <div class="glass-card rounded-2xl p-3.5">
+            <div class="flex items-start gap-2.5">
+              <span class="text-lg">${hasEnoughFat ? '💖' : '💡'}</span>
+              <div>
+                <div class="text-xs font-extrabold text-main">
+                  ${hasEnoughFat ? 'Perfekte Basis für ESN D3 + K2' : 'Tipp für ESN Vitamin D3 + K2'}
+                </div>
+                <p class="text-[11px] text-muted mt-0.5 leading-relaxed">
+                  ${hasEnoughFat
+                    ? `Mit <b>${totals.f.toFixed(1)} g Nahrungsfett</b> heute werden Vitamin D3 & K2 optimal aufgenommen.`
+                    : `Nimm <b>ESN D3 + K2</b> am besten zusammen mit deiner Jause (Käse, Frischkäse oder 3,5 % Milch) ein, da D3 & K2 fettlöslich sind.`}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <section class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <h2 class="text-xs font-extrabold uppercase tracking-wider text-muted">Deine täglichen Supplements</h2>
+              <button onclick="GIRL_SUPPS.forEach(s => { getDayData().supps[s.id] = true; }); saveState(); render(); showToast('Alle Supplements abgehakt!', '💖');" class="text-[11px] font-extrabold text-accent">
+                Alle abhaken
+              </button>
+            </div>
+            <div class="space-y-2">
+              ${stackCards}
+            </div>
+          </section>
+
+          <section class="glass-card rounded-[26px] p-4 space-y-3">
+            <div>
+              <h2 class="text-sm font-extrabold text-main">Beauty-, Zyklus- & Mikro-Bilanz</h2>
+              <p class="text-[11px] text-muted">Kombiniert aus heutigen Lebensmitteln + Supplements</p>
+            </div>
+            <div class="space-y-3 pt-1">
+              ${microBars}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 14. VIEW 5: 1-KLICK MAHLZEITEN KONFIGURATOR, THEMES & ZIELE
+    // =========================================================================
+    function renderPresetsAndMoreView() {
+      const presetListHTML = state.presets.map(preset => {
+        let pKcal = 0, pProt = 0, pKh = 0, pF = 0, pFib = 0;
+        const ingNames = preset.items.map(it => {
+          const food = getFoodById(it.foodId);
+          if (!food) return '';
+          const n = calcItemNutrition(food, it.qty);
+          pKcal += n.kcal; pProt += n.p; pKh += n.kh; pF += n.f; pFib += n.fib;
+          return `${it.qty}${food.unit} ${food.name}`;
+        }).filter(Boolean).join(' • ');
+
+        return `
+          <div class="glass-card p-3.5 rounded-2xl space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center gap-2.5">
+                <span class="text-2xl">${preset.icon}</span>
+                <div>
+                  <div class="text-sm font-extrabold text-main">${preset.name}</div>
+                  <div class="text-[11px] text-muted line-clamp-2 mt-0.5">${ingNames}</div>
+                </div>
+              </div>
+              <button onclick="applyPreset('${preset.id}')" class="shrink-0 px-3 py-1.5 rounded-xl bg-accent-soft text-accent font-extrabold text-xs border border-pink-400/30">
+                + Log
+              </button>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-pink-400/20">
+              <div class="flex gap-2 text-[11px] font-bold">
+                <span class="text-accent">${Math.round(pKcal)} kcal</span>
+                <span class="text-emerald-600">${pProt.toFixed(1)}g P</span>
+                <span class="text-amber-600">${pKh.toFixed(0)}g KH</span>
+                <span class="text-rose-500">${pF.toFixed(0)}g F</span>
+                <span class="text-pink-600">${pFib.toFixed(1)}g B</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openPresetEditorModal('${preset.id}')" class="px-2.5 py-1 rounded-lg glass-subtle text-[11px] font-bold text-main">
+                  Bearbeiten
+                </button>
+                <button onclick="deletePreset('${preset.id}')" class="px-2 py-1 rounded-lg text-[11px] text-soft hover:text-rose-500 font-bold">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="tab-view space-y-4">
+          <!-- Pink / Rosa Theme Selector -->
+          <section class="glass-card rounded-[26px] p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-extrabold text-main flex items-center gap-1.5">${bowBadgeSVG(16)} Pink & Rosa Themes</h2>
+              <span class="text-[11px] font-bold text-accent">Kawaii Mode</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              ${THEMES.map(t => `
+                <button onclick="state.theme='${t.id}'; saveState(); applyTheme('${t.id}'); render();" class="p-2.5 rounded-2xl text-left flex items-center gap-2 transition-all ${state.theme === t.id ? 'bg-accent-soft ring-2 ring-pink-400' : 'glass-subtle'}">
+                  <span class="text-lg">${t.emoji}</span>
+                  <span class="text-xs font-extrabold text-main">${t.name}</span>
+                </button>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 1-Click Meals Manager -->
+          <section class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h2 class="text-sm font-extrabold text-main">🎀 1-Klick Mahlzeiten</h2>
+                <p class="text-[11px] text-muted">Manuell konfigurieren & mit 1 Tippen loggen</p>
+              </div>
+              <button onclick="openPresetEditorModal()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="px-3.5 py-2 rounded-2xl text-xs font-extrabold text-white shadow-sm">
+                + Neue Vorlage
+              </button>
+            </div>
+            <div class="space-y-2.5">
+              ${presetListHTML}
+            </div>
+          </section>
+
+          <!-- Goals & JSON Backup -->
+          <section class="glass-card rounded-[26px] p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h2 class="text-sm font-extrabold text-main">Ziele (1,71m • 77kg • Gym)</h2>
+              <button onclick="openGoalsModal()" class="text-xs font-extrabold text-accent">Anpassen</button>
+            </div>
+            <div class="grid grid-cols-3 gap-1.5">
+              ${['recomp', 'cut', 'bulk'].map(m => `
+                <button onclick="state.goalMode='${m}'; saveState(); render();" class="py-2 px-2 rounded-xl text-center transition-all ${state.goalMode === m ? 'bg-pink-500 text-white font-extrabold shadow-sm' : 'glass-subtle text-main font-bold'}">
+                  <div class="text-[11px]">${state.goals[m].label}</div>
+                  <div class="text-[10px] opacity-85">${state.goals[m].kcal} kcal</div>
+                </button>
+              `).join('')}
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button onclick="exportBackupJSON()" class="glass-pill py-2.5 px-3 rounded-2xl text-xs font-extrabold text-main flex items-center justify-center gap-1.5">
+                📤 Backup sichern
+              </button>
+              <label class="glass-pill py-2.5 px-3 rounded-2xl text-xs font-extrabold text-main flex items-center justify-center gap-1.5 cursor-pointer">
+                📥 Backup laden
+                <input type="file" accept=".json" onchange="importBackupJSON(event)" class="hidden" />
+              </label>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 15. MODALS (1-KLICK EDITOR, QUICK LOG, NEW FOOD, GOALS)
+    // =========================================================================
+    let editingPresetDraft = null;
+
+    function openModal(html) {
+      document.getElementById('modalSheet').innerHTML = html;
+      document.getElementById('modalBackdrop').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.add('hidden');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'modalBackdrop') closeModal();
+    }
+
+    function openPresetEditorModal(presetId = null) {
+      if (presetId) {
+        const orig = state.presets.find(p => p.id === presetId);
+        editingPresetDraft = JSON.parse(JSON.stringify(orig));
+      } else {
+        editingPresetDraft = {
+          id: 'preset_' + Date.now(),
+          name: '',
+          icon: '🍓',
+          items: [
+            { foodId: 'dinkelbrot', qty: 100 },
+            { foodId: 'proteinkaese', qty: 60 }
+          ]
+        };
+      }
+      renderPresetEditorContent();
+    }
+
+    function saveCurrentDayAsPreset() {
+      const day = getDayData();
+      if (day.entries.length === 0) return;
+      editingPresetDraft = {
+        id: 'preset_' + Date.now(),
+        name: 'Meine Jause ' + formatDateLabel(state.selectedDate),
+        icon: '🎀',
+        items: day.entries.map(e => ({ foodId: e.foodId, qty: e.qty }))
+      };
+      renderPresetEditorContent();
+    }
+
+    function renderPresetEditorContent() {
+      const icons = ['🥪', '🍓', '🍫', '🥗', '🥞', '🥣', '🍳', '🎀'];
+      let totKcal = 0, totP = 0, totKh = 0, totF = 0, totFib = 0;
+      editingPresetDraft.items.forEach(it => {
+        const n = calcItemNutrition(getFoodById(it.foodId), it.qty);
+        totKcal += n.kcal; totP += n.p; totKh += n.kh; totF += n.f; totFib += n.fib;
+      });
+
+      const itemsHTML = editingPresetDraft.items.map((it, idx) => {
+        const food = getFoodById(it.foodId);
+        if (!food) return '';
+        return `
+          <div class="glass-subtle p-2.5 rounded-2xl flex items-center justify-between gap-2">
+            <span class="text-xs font-extrabold text-main truncate flex-1">${food.name}</span>
+            <div class="flex items-center gap-1.5">
+              <input type="number" step="any" value="${it.qty}" onchange="editingPresetDraft.items[${idx}].qty = Math.max(0.5, parseFloat(this.value)||0); renderPresetEditorContent();" class="w-16 theme-input rounded-xl py-1 px-2 text-center text-xs font-extrabold" />
+              <span class="text-[10px] text-muted w-6">${food.unit}</span>
+              <button onclick="editingPresetDraft.items.splice(${idx}, 1); renderPresetEditorContent();" class="text-soft hover:text-rose-500 px-1.5 font-bold">✕</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const foodOptions = state.foods.map(f => `<option value="${f.id}">${f.name} (${f.unit})</option>`).join('');
+
+      openModal(`
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-main">🎀 1-Klick Mahlzeit konfigurieren</h3>
+            <button onclick="closeModal()" class="w-8 h-8 rounded-full glass-subtle text-main flex items-center justify-center font-bold">✕</button>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="text-[11px] font-bold text-muted">Name der Mahlzeit</label>
+            <input type="text" value="${editingPresetDraft.name}" oninput="editingPresetDraft.name = this.value" placeholder="z. B. Meine Jause, Pink Skyr Bowl..." class="w-full theme-input rounded-2xl px-3.5 py-2.5 text-xs font-bold" />
+          </div>
+
+          <div class="flex gap-1.5 overflow-x-auto no-scrollbar">
+            ${icons.map(ic => `
+              <button onclick="editingPresetDraft.icon='${ic}'; renderPresetEditorContent();" class="w-9 h-9 rounded-xl flex items-center justify-center text-lg ${editingPresetDraft.icon === ic ? 'bg-pink-500 text-white shadow-sm' : 'glass-subtle'}">${ic}</button>
+            `).join('')}
+          </div>
+
+          <div class="glass-card p-3 rounded-2xl flex justify-between text-xs font-extrabold">
+            <span class="text-accent">${Math.round(totKcal)} kcal</span>
+            <span class="text-emerald-600">${totP.toFixed(1)}g P</span>
+            <span class="text-amber-600">${totKh.toFixed(1)}g KH</span>
+            <span class="text-rose-500">${totF.toFixed(1)}g F</span>
+            <span class="text-pink-600">${totFib.toFixed(1)}g B</span>
+          </div>
+
+          <div class="space-y-2 max-h-48 overflow-y-auto pr-1">
+            ${itemsHTML || '<div class="text-xs text-muted text-center py-3">Füge unten Zutaten hinzu</div>'}
+          </div>
+
+          <div class="flex gap-2 pt-1">
+            <select id="presetAddFoodSelect" class="flex-1 theme-input rounded-2xl px-3 py-2.5 text-xs font-bold">
+              ${foodOptions}
+            </select>
+            <button onclick="addIngredientToPresetDraft()" class="px-4 py-2.5 rounded-2xl bg-accent-soft text-accent font-extrabold text-xs border border-pink-400/30 shrink-0">
+              + Zutat
+            </button>
+          </div>
+
+          <button onclick="savePresetDraft()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="w-full py-3 rounded-2xl text-xs font-extrabold text-white shadow-md">
+            Als 1-Klick Mahlzeit speichern
+          </button>
+        </div>
+      `);
+    }
+
+    function addIngredientToPresetDraft() {
+      const sel = document.getElementById('presetAddFoodSelect');
+      const food = getFoodById(sel.value);
+      if (!food) return;
+      editingPresetDraft.items.push({ foodId: food.id, qty: food.defaultQty });
+      renderPresetEditorContent();
+    }
+
+    function savePresetDraft() {
+      const name = (editingPresetDraft.name || '').trim();
+      if (!name) return showToast('Bitte Name eingeben', '⚠️');
+      if (editingPresetDraft.items.length === 0) return showToast('Mindestens 1 Zutat wählen', '⚠️');
+      const idx = state.presets.findIndex(p => p.id === editingPresetDraft.id);
+      if (idx >= 0) state.presets[idx] = editingPresetDraft;
+      else state.presets.unshift(editingPresetDraft);
+      saveState();
+      closeModal();
+      render();
+      showToast(`"${name}" gespeichert!`, '🎀');
+    }
+
+    function deletePreset(presetId) {
+      state.presets = state.presets.filter(p => p.id !== presetId);
+      saveState();
+      render();
+      showToast('Vorlage gelöscht', '🗑️');
+    }
+
+    function openQuickLogModal() {
+      const options = state.foods.map(f => `<option value="${f.id}">${f.name} (${f.kcal} kcal / 100${f.unit})</option>`).join('');
+      openModal(`
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-main">🍓 Schnell loggen</h3>
+            <button onclick="closeModal()" class="w-8 h-8 rounded-full glass-subtle text-main flex items-center justify-center font-bold">✕</button>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <label class="text-[11px] font-bold text-muted">Lebensmittel wählen</label>
+              <select id="quickFoodSel" onchange="const f = getFoodById(this.value); document.getElementById('quickFoodQty').value = f.defaultQty; document.getElementById('quickFoodUnit').textContent = f.unit;" class="w-full mt-1 theme-input rounded-2xl px-3.5 py-3 text-xs font-bold">
+                ${options}
+              </select>
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-muted">Menge</label>
+              <div class="flex items-center gap-2 mt-1">
+                <input id="quickFoodQty" type="number" step="any" value="${state.foods[0].defaultQty}" class="flex-1 theme-input rounded-2xl px-3.5 py-2.5 text-sm font-extrabold" />
+                <span id="quickFoodUnit" class="text-xs font-bold text-muted px-2">${state.foods[0].unit}</span>
+              </div>
+            </div>
+            <button onclick="addFoodEntry(document.getElementById('quickFoodSel').value, document.getElementById('quickFoodQty').value); closeModal();" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="w-full py-3 rounded-2xl text-xs font-extrabold text-white shadow-md">
+              Hinzufügen
+            </button>
+          </div>
+        </div>
+      `);
+    }
+
+    function openNewFoodModal() {
+      openModal(`
+        <div class="space-y-3.5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-main">Neues Lebensmittel (pro 100 g/ml)</h3>
+            <button onclick="closeModal()" class="w-8 h-8 rounded-full glass-subtle text-main flex items-center justify-center font-bold">✕</button>
+          </div>
+          <input id="nfName" type="text" placeholder="Name (z. B. Topfen 20 %)" class="w-full theme-input rounded-2xl px-3.5 py-2.5 text-xs font-bold" />
+          <div class="grid grid-cols-2 gap-2">
+            <div><label class="text-[10px] font-bold text-muted">Kalorien (kcal)</label><input id="nfKcal" type="number" placeholder="0" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-emerald-600">Protein (g)</label><input id="nfP" type="number" step="0.1" placeholder="0" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-amber-600">Kohlenhydrate (g)</label><input id="nfKh" type="number" step="0.1" placeholder="0" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-rose-500">Fett (g)</label><input id="nfF" type="number" step="0.1" placeholder="0" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-extrabold text-accent">Ballaststoffe (g)</label><input id="nfFib" type="number" step="0.1" placeholder="0" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-muted">Standard-Portion (g)</label><input id="nfDef" type="number" value="100" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+          </div>
+          <button onclick="saveNewCustomFood()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="w-full py-3 rounded-2xl text-xs font-extrabold text-white">Speichern</button>
+        </div>
+      `);
+    }
+
+    function saveNewCustomFood() {
+      const name = (document.getElementById('nfName').value || '').trim();
+      if (!name) return showToast('Name erforderlich', '⚠️');
+      state.foods.unshift({
+        id: 'custom_' + Date.now(), name, cat: 'Gescannt & Eigene', unit: 'g', gutFriendly: true,
+        defaultQty: Number(document.getElementById('nfDef').value) || 100,
+        kcal: Number(document.getElementById('nfKcal').value) || 0,
+        p: Number(document.getElementById('nfP').value) || 0,
+        kh: Number(document.getElementById('nfKh').value) || 0,
+        f: Number(document.getElementById('nfF').value) || 0,
+        fib: Number(document.getElementById('nfFib').value) || 0,
+        micro: { mg: 0, fe: 0, zn: 0, ca: 0, b12: 0, biotin: 0 }
+      });
+      saveState();
+      closeModal();
+      render();
+      showToast(`${name} angelegt!`, '🎀');
+    }
+
+    function openGoalsModal() {
+      const g = state.goals[state.goalMode];
+      openModal(`
+        <div class="space-y-3.5">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold text-main">Ziele (${g.label}) anpassen</h3>
+            <button onclick="closeModal()" class="w-8 h-8 rounded-full glass-subtle text-main flex items-center justify-center font-bold">✕</button>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <div><label class="text-[10px] font-bold text-muted">Kalorien (kcal)</label><input id="gKcal" type="number" value="${g.kcal}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-emerald-600">Protein (g)</label><input id="gP" type="number" value="${g.p}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-amber-600">Kohlenhydrate (g)</label><input id="gKh" type="number" value="${g.kh}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-rose-500">Fett (g)</label><input id="gF" type="number" value="${g.f}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-extrabold text-accent">Ballaststoffe (g)</label><input id="gFib" type="number" value="${g.fib}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+            <div><label class="text-[10px] font-bold text-sky-600">Wasser (ml)</label><input id="gWater" type="number" value="${g.water}" class="w-full mt-0.5 theme-input rounded-xl px-3 py-2 text-xs font-bold" /></div>
+          </div>
+          <button onclick="saveGoalMode()" style="background: linear-gradient(135deg, var(--accent), var(--accent-2));" class="w-full py-3 rounded-2xl text-xs font-extrabold text-white">Ziele speichern</button>
+        </div>
+      `);
+    }
+
+    function saveGoalMode() {
+      const oldLabel = state.goals[state.goalMode].label;
+      state.goals[state.goalMode] = {
+        label: oldLabel,
+        kcal: Number(document.getElementById('gKcal').value) || 2250,
+        p: Number(document.getElementById('gP').value) || 155,
+        kh: Number(document.getElementById('gKh').value) || 235,
+        f: Number(document.getElementById('gF').value) || 72,
+        fib: Number(document.getElementById('gFib').value) || 30,
+        water: Number(document.getElementById('gWater').value) || 2750
+      };
+      saveState();
+      closeModal();
+      render();
+      showToast('Ziele aktualisiert!', '💖');
+    }
+
+    function exportBackupJSON() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `kittynutri-backup-${getTodayISO(0)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Backup gespeichert', '📤');
+    }
+
+    function importBackupJSON(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported && imported.foods && imported.days) {
+            state = imported;
+            saveState();
+            applyTheme(state.theme);
+            render();
+            showToast('Backup geladen!', '📥');
+          }
+        } catch {
+          showToast('Fehler beim Laden', '⚠️');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function render() {
+      updateHeaderAndNav();
+      const viewport = document.getElementById('appViewport');
+      if (state.activeTab === 'today') viewport.innerHTML = renderTodayView();
+      else if (state.activeTab === 'cycle') viewport.innerHTML = renderCycleView();
+      else if (state.activeTab === 'scan') viewport.innerHTML = renderScanView();
+      else if (state.activeTab === 'supps') viewport.innerHTML = renderSuppsView();
+      else if (state.activeTab === 'presets') viewport.innerHTML = renderPresetsAndMoreView();
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+
+    applyTheme(state.theme);
+    render();
+  </script>
+</body>
+</html>
